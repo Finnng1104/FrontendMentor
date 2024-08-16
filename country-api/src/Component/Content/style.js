@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import { Row } from 'antd';
 export const ContainerComponent = styled.div`
-    width: 80%;
+    background-color: ${({ isDarkMode }) => (isDarkMode ? '#202d36' : '#fafafa')};
+    color: ${({ isDarkMode }) => (isDarkMode ? '#fff' : '#000')};
+    width: 100%;
     margin: auto;
+    padding: 0 10%;
     @media (max-width: 1437px) {
-    width: 90%;
+      padding: 0 5%;
+    }
+    @media (max-width: 450px) {
+      padding: 0 12%;
     }
 `;
 export const ShowNotification = styled.div`
@@ -12,6 +18,8 @@ export const ShowNotification = styled.div`
     margin: auto;
     text-align: center;
     padding: 20px 0;
+    background-color: ${({ isDarkMode }) => (isDarkMode ? '#202d36' : '#fafafa')};
+    color: ${({ isDarkMode }) => (isDarkMode ? '#fff' : '#000')};
     span{
         font-size: 40px;
     }
