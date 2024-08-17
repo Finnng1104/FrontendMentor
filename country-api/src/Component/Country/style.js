@@ -10,7 +10,7 @@ export const ConuntryComponent = styled.div`
     background-color: ${({ isDarkMode }) => (isDarkMode ? '#2A3743' : '#fafafa')};
     color: ${({ isDarkMode }) => (isDarkMode ? '#fff' : '#000')};
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+    cursor: pointer;
     .Country-img {
         width: 100%;
         height: 180px;

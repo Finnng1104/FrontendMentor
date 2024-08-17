@@ -15,10 +15,11 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Nunito Sans', sans-serif;
   }
 
   body {
-    font-family: Arial, sans-serif;
+   
     font-size: 16px;
     background-color: ${({ isDarkMode }) => (isDarkMode ? '#202d36' : '#fafafa')};
 

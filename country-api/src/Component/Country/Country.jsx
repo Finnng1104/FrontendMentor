@@ -11,8 +11,7 @@ const Country = ({ flagUrl, countryName, population, region, capital, isDarkMode
     // Function to handle click event and navigate to the country detail page
     const handleClick = () => {
       // Encode the country name to ensure it is a valid URL
-      const formattedCountryName = encodeURIComponent(countryName);
-      navigate(`/country/${formattedCountryName}`);
+      navigate(`/country/${countryName}`);
     };
 
     // Format the population number using the formatter

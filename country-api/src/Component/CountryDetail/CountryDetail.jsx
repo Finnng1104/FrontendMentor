@@ -5,22 +5,24 @@ import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { CountryDetailContainer, ShowNotification } from './style'; 
 
-// CountryDetail component: Displays detailed information about a selected country
 const CountryDetail = ({ isDarkMode }) => {
- 
-  // State to store country data and loading status
   const [countryData, setCountryData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { countryName } = useParams(); // Get the country name from the URL parameters
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const { countryName } = useParams(); 
+  const navigate = useNavigate();
 
-  // useEffect to fetch country data when the component mounts or countryName changes
   useEffect(() => {
-    const numberFormatter = new Intl.NumberFormat('en-US'); // Formatter for population numbers
+    const numberFormatter = new Intl.NumberFormat('en-US');
     const fetchCountryData = async () => {
       try {
-        setLoading(true); // Start loading data
-        const response = await axios.get(`https://restcountries.com/v3.1/name/${countryName}`);
+        setLoading(true);
+
+        // Điều kiện kiểm tra nếu countryName là "China"
+        const apiUrl = countryName.toLowerCase() === 'china' 
+          ? `https://restcountries.com/v3.1/alpha/CN` 
+          : `https://restcountries.com/v3.1/name/${countryName}`;
+
+        const response = await axios.get(apiUrl);
         const country = response.data[0];
 
         // Fetch neighboring countries' details
@@ -32,12 +34,11 @@ const CountryDetail = ({ isDarkMode }) => {
               return borderResponse.data[0];
             } catch (error) {
               console.error(`Error fetching border country ${borderCode}:`, error);
-              return null; // Handle the error for individual border country fetch
+              return null;
             }
           })
         );
 
-        // Set the country data with formatted details
         setCountryData({
           name: country.name.common,
           flagUrl: country.flags.png,
@@ -57,40 +58,32 @@ const CountryDetail = ({ isDarkMode }) => {
       } catch (error) {
         console.error('Error fetching country data:', error);
       } finally {
-        setLoading(false); // Data loading complete
+        setLoading(false);
       }
     };
    
     fetchCountryData();
   }, [countryName]);
 
-  // Handle navigation to a neighboring country's detail page
   const handleBorderClick = (borderCountryCode) => {
     navigate(`/country/${borderCountryCode}`);
   };
 
-  // Handle back button click to navigate back to the home page
   const handleBackClick = () => {
     navigate('/');
   };
 
-  // Show loading notification if data is still being fetched
   if (loading) return <ShowNotification isDarkMode={isDarkMode}><h3>Loading...</h3></ShowNotification>;
-
-  // Show a notification if no country data is available
   if (!countryData) return <ShowNotification isDarkMode={isDarkMode}><h3>No data available</h3></ShowNotification>;
 
   return (
     <>
-      {/* Back button to navigate back to the main page */}
       <CountryDetailContainer isDarkMode={isDarkMode}>
-          <Button isDarkMode={isDarkMode} onClick={handleBackClick} style={{ marginBottom: '20px', padding: '20px 30px', fontSize: '18px' }}>
+          <Button onClick={handleBackClick} style={{ marginBottom: '20px', padding: '20px 30px', fontSize: '18px', cursor: 'pointer' }}>
               <ArrowLeftOutlined />
               Back
           </Button>
       </CountryDetailContainer>
-
-      {/* Display country details */}
       <CountryDetailContainer isDarkMode={isDarkMode}>
         <div className='img'>
             <img src={countryData.flagUrl} alt={countryData.nativeName} />
@@ -112,7 +105,6 @@ const CountryDetail = ({ isDarkMode }) => {
               </div>
             </div>
             <div>
-              {/* Display neighboring countries */}
               <div style={{marginTop: "10px"}}>
                   <b>Border Countries:</b>
                   {countryData.borders.length > 0 ? (

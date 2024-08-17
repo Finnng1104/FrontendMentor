@@ -8,7 +8,6 @@ export const ContainerComponent = styled.div`
     padding: 50px 10%;
     display: flex;
     justify-content: space-between;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     @media (max-width: 1437px) {
         padding: 50px 5%;
     }

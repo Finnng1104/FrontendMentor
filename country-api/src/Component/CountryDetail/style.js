@@ -22,12 +22,11 @@ export const CountryDetailContainer = styled.div`
   .img{
     width: 45%;
     height: 400px;
-    text-align: center;
     overflow: hidden;
     img{
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
     }
   }
   .content{
