@@ -2,16 +2,20 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { ConuntryComponent, CountryInformation } from "./style";
 
+// Country component: Displays individual country information and handles navigation to the country's detail page
 const Country = ({ flagUrl, countryName, population, region, capital, isDarkMode }) => {
+    // Number formatter for formatting population numbers
     const numberFormatter = new Intl.NumberFormat('en-US');
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Hook to navigate programmatically
 
+    // Function to handle click event and navigate to the country detail page
     const handleClick = () => {
-      // Mã hóa tên quốc gia để đảm bảo URL hợp lệ
+      // Encode the country name to ensure it is a valid URL
       const formattedCountryName = encodeURIComponent(countryName);
       navigate(`/country/${formattedCountryName}`);
     };
 
+    // Format the population number using the formatter
     const formattedPopulation = numberFormatter.format(population);
 
     return (

@@ -102,3 +102,15 @@ export const CountryDetailContainer = styled.div`
         }
     }
 `;
+
+export const ShowNotification = styled.div`
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 20px 0;
+    background-color: ${({ isDarkMode }) => (isDarkMode ? '#202d36' : '#fafafa')};
+    color: ${({ isDarkMode }) => (isDarkMode ? '#fff' : '#000')};
+    span{
+        font-size: 40px;
+    }
+`   
